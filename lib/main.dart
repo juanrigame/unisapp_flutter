@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
@@ -66,8 +69,7 @@ Widget loginDemo(context) {
                 color: Colors.blue, borderRadius: BorderRadius.circular(20)),
             child: FlatButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => HomePage()));
+                login(context, "", "");
               },
               child: Text(
                 'Acceder',
@@ -79,6 +81,21 @@ Widget loginDemo(context) {
       ),
     ),
   );
+}
+
+void login(context, matricula, password) async {
+  var url = 'http://localhost/unisapp/ws/login.php';
+  var response = await http
+      .post(url, body: {'matricula': matricula, "password": password});
+  print('Response status: ${response.statusCode}');
+  print('Response body: ${response.body}');
+  var body = jsonDecode(response.body);
+  print(await http.read('https://example.com/foobar.txt'));
+  if (body.result == "OK")
+    Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
+  else {
+    //mostrar mensaje de datos incorrectos
+  }
 }
 
 Widget HomePage() {
