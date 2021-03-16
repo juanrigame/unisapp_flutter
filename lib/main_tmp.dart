@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:unisapp_app/screens/LoginWidget.dart';
 
 void main() {
-  runApp(MyApp());
+  //runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,15 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //debugShowCheckedModeBanner: false, home: loginDemo(context)
-      title: "UNISAPP",
-      theme: ThemeData(accentColor: Colors.blue[100]),
-      initialRoute: "/",
-      home: LoginWidget(),
-      /* routes: {
-          "/": loginDemo(context)
-        }, */
-    );
+        debugShowCheckedModeBanner: false, home: loginDemo(context));
   }
 }
 
@@ -95,7 +86,7 @@ Widget loginDemo(context) {
 }
 
 void login(context, matricula, password) async {
-  var url = 'http://10.0.2.2/unisapp/ws/login.php';
+  var url = 'http://10.0.2.2';
   //android var url = 'http://10.0.2.2';
   //real android device url = 'http://192.168.1.67';//Actual ipv4 localhost address
 
@@ -103,9 +94,9 @@ void login(context, matricula, password) async {
   try {
     /* var response = await dio.post(
         "$url/unisapp/ws/login.php?matricula=$matricula&password=$password"); */
-    var response = await http.post(url, body: {"matricula": matricula});
+    var response = await http
+        .post(url, body: {"matricula": matricula, "password": password});
     print('Response status: ${response.statusCode}');
-    print('Response: ${response.body}');
     var body = jsonDecode(response.body);
     //print(await http.read('https://example.com/foobar.txt'));
     print('Response body: ${response.body}');
