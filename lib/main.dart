@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:unisapp_app/screens/Agendaunaasesoria.dart';
+import 'package:unisapp_app/screens/Listadeasesorias.dart';
 import 'package:unisapp_app/screens/LoginWidget.dart';
+import 'package:unisapp_app/screens/PantallaprincipalAlumno.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: "UNISAPP",
       theme: ThemeData(accentColor: Colors.blue[100]),
       initialRoute: "/",
-      home: LoginWidget(),
+      home: Listadeasesorias(),
       /* routes: {
           "/": loginDemo(context)
         }, */
